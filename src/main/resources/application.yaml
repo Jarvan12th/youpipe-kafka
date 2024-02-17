@@ -1,1 +1,36 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://username:password@localhost:27017/video?authSource=admin
+  datasource:
+    oss:
+      raw:
+        provider: minio
+        endpoint: http://localhost:9000
+        access-key: Y7K9YOfQJv5DHZkcNGeS
+        secret-key: rV2Svk4rSyfLe6Cf8MhoZ8NaDR7En4uLYgQnLotx
+        bucket: raw
+        region: ap-southeast-2
+        object-dir-prefix: videos
+      encoded:
+        provider: minio
+        endpoint: http://localhost:9000
+        access-key: Y7K9YOfQJv5DHZkcNGeS
+        secret-key: rV2Svk4rSyfLe6Cf8MhoZ8NaDR7En4uLYgQnLotx
+        bucket: encoded
+        region: ap-southeast-2
+        object-dir-prefix: videos
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: video-encode-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
 
